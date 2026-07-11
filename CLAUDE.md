@@ -173,8 +173,8 @@ If anything is ambiguous or conflicts with this file, **stop and ask** rather th
 
 ## 9. Current status
 
-- [ ] Bootstrap: Next.js + TS + Tailwind + shadcn, folder structure, git init
-- [ ] Palette wired into Tailwind + shadcn tokens
+- [x] Bootstrap: Next.js + TS + Tailwind + shadcn, folder structure, git init
+- [x] Palette wired into Tailwind + shadcn tokens
 - [ ] Supabase project + schema + RLS
 - [ ] Landing page (overlay hero + sections)
 - [ ] Stories: list + submit (moderated) + admin queue
