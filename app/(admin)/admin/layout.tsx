@@ -4,5 +4,5 @@ export default function AdminLayout({
   children: React.ReactNode;
 }>) {
   // TODO: gate with Supabase auth session check once credentials are wired up.
-  return <div className="flex min-h-full flex-col">{children}</div>;
+  return <div className="min-h-full bg-secondary/30">{children}</div>;
 }

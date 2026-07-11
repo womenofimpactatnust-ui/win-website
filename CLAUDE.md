@@ -176,12 +176,12 @@ If anything is ambiguous or conflicts with this file, **stop and ask** rather th
 - [x] Bootstrap: Next.js + TS + Tailwind + shadcn, folder structure, git init
 - [x] Palette wired into Tailwind + shadcn tokens
 - [ ] Supabase project + schema + RLS
-- [ ] Landing page (overlay hero + sections)
-- [ ] Stories: list + submit (moderated) + admin queue
-- [ ] Podcasts: HLS player + list + admin
-- [ ] Newsletter: article publish + admin
-- [ ] What To Do page
-- [ ] About page
+- [x] Landing page (overlay hero + sections)
+- [ ] Stories: list + submit (moderated) + admin queue — UI shell built with placeholder data; moderation/RLS/live data pending Supabase + explicit sign-off per section 7
+- [ ] Podcasts: HLS player + list + admin — UI shell built with placeholder data; hls.js wiring and admin actions pending real video assets + Supabase
+- [ ] Newsletter: article publish + admin — UI shell built with placeholder data; publish/admin actions pending Supabase
+- [ ] What To Do page — UI shell built; content is TODO placeholders pending society-verified resources, per section 7
+- [x] About page
 - [ ] Deploy to Vercel
 
 Keep this checklist updated as tasks complete.
