@@ -1,10 +1,17 @@
+import Image from "next/image";
+
 export function ImageTextBand() {
   return (
     <section className="mx-auto max-w-6xl px-6 py-8">
       <div className="grid items-center gap-10 rounded-[2rem] bg-secondary/60 p-8 md:grid-cols-2 md:p-14">
-        {/* Placeholder for community photography */}
-        <div className="flex aspect-[4/3] items-center justify-center rounded-2xl bg-gradient-to-br from-middle-purple to-old-lavender text-sm font-medium text-white/80">
-          Photo: community
+        <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
+          <Image
+            src="/media/events/behenchaara-circle/image-2.jpeg"
+            alt="Since Day One"
+            fill
+            sizes="(min-width: 768px) 50vw, 100vw"
+            className="w-full h-full object-cover"
+          />
         </div>
 
         <div>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
 function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
@@ -30,8 +31,14 @@ const NAV_LINKS = [
 export function Navbar() {
   return (
     <nav className="flex items-center justify-between gap-4 rounded-full bg-white/95 px-4 py-2.5 shadow-lg shadow-jacarta/10 backdrop-blur">
-      <Link href="/" className="shrink-0 text-lg font-heading font-semibold text-jacarta">
-        WIN
+      <Link href="/" className="relative h-7 w-12 shrink-0 overflow-hidden">
+        <Image
+          src="/media/logo/WIN-Logooo.png"
+          alt="WIN logo"
+          fill
+          sizes="48px"
+          className="w-full h-full object-cover"
+        />
       </Link>
 
       <ul className="hidden items-center gap-6 text-sm font-medium text-jacarta/80 md:flex">
