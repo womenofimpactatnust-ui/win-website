@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/layout/navbar";
 
@@ -6,7 +7,14 @@ export function Hero() {
   return (
     <section className="px-4 pt-4 md:px-6 md:pt-6">
       <div className="relative isolate overflow-hidden rounded-[2rem] bg-gradient-to-br from-old-lavender via-middle-purple to-jacarta">
-        {/* Placeholder for hero photography — swap for a real background image */}
+        <Image
+          src="/media/events/orientation/Image-1.jpg"
+          alt="Orientation"
+          fill
+          priority
+          sizes="100vw"
+          className="w-full h-full object-cover"
+        />
         <div className="absolute inset-0 bg-jacarta/60" aria-hidden />
 
         <div className="relative flex flex-col gap-16 px-4 pb-16 pt-4 sm:px-6 md:pb-24 md:pt-6">
