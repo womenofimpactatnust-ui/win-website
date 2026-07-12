@@ -23,6 +23,7 @@ function FacebookIcon(props: React.SVGProps<SVGSVGElement>) {
 const NAV_LINKS = [
   { href: "/stories", label: "Stories" },
   { href: "/podcasts", label: "Podcasts" },
+  { href: "/events", label: "Events" },
   { href: "/newsletter", label: "Newsletter" },
   { href: "/what-to-do", label: "What To Do" },
   { href: "/about", label: "About" },
