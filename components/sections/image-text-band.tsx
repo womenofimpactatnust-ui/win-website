@@ -1,32 +1,44 @@
 import Image from "next/image";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import { Reveal } from "@/components/ui/reveal";
 
 export function ImageTextBand() {
   return (
-    <section className="mx-auto max-w-6xl px-6 py-8">
-      <div className="grid items-center gap-10 rounded-[2rem] bg-secondary/60 p-8 md:grid-cols-2 md:p-14">
-        <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
+    <section className="bg-secondary/60 py-16">
+      <div className="grid items-center gap-10 px-6 md:grid-cols-2 md:px-12 lg:px-20">
+        <Reveal direction="left" className="relative aspect-[4/3] overflow-hidden rounded-2xl">
           <Image
             src="/media/events/behenchaara-circle/image-2.jpeg"
-            alt="Since Day One"
+            alt="Women of Impact at NUST"
             fill
             sizes="(min-width: 768px) 50vw, 100vw"
             className="w-full h-full object-cover"
           />
-        </div>
+        </Reveal>
 
-        <div>
+        <Reveal direction="right" delay={150} className="text-left">
           <p className="text-sm font-semibold uppercase tracking-wide text-old-lavender">
-            Since day one
+            About
           </p>
           <h2 className="mt-2 font-heading text-3xl font-semibold text-jacarta sm:text-4xl">
-            A safe space, built by and for the women of NUST
+            Women of Impact at NUST
           </h2>
           <p className="mt-4 max-w-md text-jacarta/75">
-            Every story submitted is reviewed with care before it&apos;s shared. WIN
-            exists to make sure no one has to face a hard moment alone — and that
-            support, resources, and community are always within reach.
+            It started with a simple realization: too many women at NUST were
+            carrying hard stories alone. WIN began as a handful of conversations
+            in a circle — and grew into a community where every voice is heard,
+            every story matters, and no one has to face a hard moment by
+            herself.
           </p>
-        </div>
+          <Link
+            href="/about"
+            className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-middle-purple hover:text-jacarta"
+          >
+            Learn more about WIN
+            <ArrowUpRight className="size-4" />
+          </Link>
+        </Reveal>
       </div>
     </section>
   );

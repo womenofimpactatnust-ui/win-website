@@ -64,11 +64,16 @@ outside this palette without asking.
 
 Reference vibe: soft, warm, rounded. Structure comes from a provided reference mock.
 
-- **Hero is an overlay card, NOT a full-bleed dark hero.** A rounded rectangle card
-  with margins, containing a background photo with a dark (Jacarta-tinted) gradient
-  overlay on top so white text is readable.
-- **Floating pill navbar** near the top of the hero: logo left, nav links center,
-  social icons + a primary button right.
+- **Hero is full-bleed, edge-to-edge.** No side margins — it spans the full viewport
+  width. Corners are only curved via the wave clip-path at the bottom edge (top edge is
+  square/flush). Background photo with a dark (Jacarta-tinted) gradient overlay at
+  ~55-60% opacity on top so white text stays readable without hiding the photo.
+  Every page hero (landing + inner-page `PageHero` + detail-page heroes) shares this
+  same wave clip-path shape for consistency.
+- **Pill navbar** spans the hero's inner content width (with its own padding, not
+  floating with page margins): logo left, nav links center (active link gets a
+  queen-pink pill), social icons + hamburger toggle right. Mobile uses a real
+  hamburger-to-X icon toggle that expands a full-width dropdown panel beneath the pill.
 - Below hero, on light/cream background, in order:
   `3 feature cards → image + text band → testimonials → gallery grid → CTA band → footer`
 - The 3 feature cards map to WIN's core: **Stories · Podcasts · What To Do**.
