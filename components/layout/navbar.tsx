@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { X } from "lucide-react";
 
 function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -39,6 +40,21 @@ function isActiveLink(pathname: string, href: string) {
 export function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (!open) return;
+
+    document.body.style.overflow = "hidden";
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open]);
 
   return (
     <div className="relative z-20">
@@ -95,69 +111,96 @@ export function Navbar() {
 
           <button
             type="button"
-            onClick={() => setOpen((v) => !v)}
-            aria-label={open ? "Close menu" : "Open menu"}
+            onClick={() => setOpen(true)}
+            aria-label="Open menu"
             aria-expanded={open}
             className="relative flex size-9 shrink-0 items-center justify-center rounded-full text-jacarta transition-colors hover:bg-jacarta/5 lg:hidden"
           >
-            <span
-              className={`absolute h-0.5 w-5 rounded-full bg-current transition-all duration-300 ${
-                open ? "rotate-45" : "-translate-y-1.5"
-              }`}
-            />
-            <span
-              className={`absolute h-0.5 w-5 rounded-full bg-current transition-all duration-300 ${
-                open ? "opacity-0" : "opacity-100"
-              }`}
-            />
-            <span
-              className={`absolute h-0.5 w-5 rounded-full bg-current transition-all duration-300 ${
-                open ? "-rotate-45" : "translate-y-1.5"
-              }`}
-            />
+            <span className="absolute h-0.5 w-5 -translate-y-1.5 rounded-full bg-current" />
+            <span className="absolute h-0.5 w-5 rounded-full bg-current" />
+            <span className="absolute h-0.5 w-5 translate-y-1.5 rounded-full bg-current" />
           </button>
         </div>
       </nav>
 
+      {/* Mobile sidebar */}
       <div
-        className={`grid overflow-hidden transition-all duration-300 ease-out lg:hidden ${
-          open ? "mt-3 grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+        className={`fixed inset-0 z-50 bg-jacarta/50 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${
+          open ? "opacity-100" : "pointer-events-none opacity-0"
+        }`}
+        onClick={() => setOpen(false)}
+        aria-hidden={!open}
+      />
+
+      <aside
+        role="dialog"
+        aria-modal="true"
+        aria-label="Site menu"
+        className={`fixed inset-y-0 right-0 z-50 flex w-[82vw] max-w-xs flex-col bg-white shadow-2xl shadow-jacarta/25 transition-transform duration-300 ease-out lg:hidden ${
+          open ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="overflow-hidden">
-          <div className="rounded-3xl bg-white p-4 shadow-xl shadow-jacarta/15">
-            <ul className="flex flex-col gap-1 text-sm font-medium text-jacarta/80">
-              {NAV_LINKS.map((link) => {
-                const active = isActiveLink(pathname, link.href);
-                return (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      onClick={() => setOpen(false)}
-                      aria-current={active ? "page" : undefined}
-                      className={
-                        active
-                          ? "block rounded-full bg-queen-pink px-3 py-2 text-jacarta"
-                          : "block rounded-full px-3 py-2 transition-colors hover:bg-queen-pink/40 hover:text-jacarta"
-                      }
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-            <div className="mt-3 flex items-center gap-4 border-t border-jacarta/10 px-3 pt-3 text-jacarta/70">
-              <Link href="#" aria-label="Instagram" className="hover:text-jacarta">
-                <InstagramIcon className="size-4" />
-              </Link>
-              <Link href="#" aria-label="Facebook" className="hover:text-jacarta">
-                <FacebookIcon className="size-4" />
-              </Link>
-            </div>
-          </div>
+        <div className="flex items-center justify-between px-5 pt-5">
+          <Link
+            href="/"
+            onClick={() => setOpen(false)}
+            className="relative size-11 shrink-0 overflow-hidden rounded-full bg-white ring-1 ring-jacarta/10"
+          >
+            <Image
+              src="/media/logo/WIN-Logooo.png"
+              alt="WIN logo"
+              fill
+              sizes="44px"
+              className="object-cover"
+            />
+          </Link>
+          <button
+            type="button"
+            onClick={() => setOpen(false)}
+            aria-label="Close menu"
+            className="flex size-9 items-center justify-center rounded-full text-jacarta transition-colors hover:bg-jacarta/5"
+          >
+            <X className="size-5" />
+          </button>
         </div>
-      </div>
+
+        <ul className="mt-8 flex flex-col gap-1 px-5 text-base font-medium text-jacarta/80">
+          {NAV_LINKS.map((link) => {
+            const active = isActiveLink(pathname, link.href);
+            return (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  onClick={() => setOpen(false)}
+                  aria-current={active ? "page" : undefined}
+                  className={
+                    active
+                      ? "block rounded-full bg-queen-pink px-4 py-2.5 text-jacarta"
+                      : "block rounded-full px-4 py-2.5 transition-colors hover:bg-queen-pink/40 hover:text-jacarta"
+                  }
+                >
+                  {link.label}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+
+        <div className="mt-auto flex items-center gap-4 border-t border-jacarta/10 px-5 py-5 text-jacarta/70">
+          <Link
+            href="https://www.instagram.com/win_nust/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+            className="hover:text-jacarta"
+          >
+            <InstagramIcon className="size-5" />
+          </Link>
+          <Link href="#" aria-label="Facebook" className="hover:text-jacarta">
+            <FacebookIcon className="size-5" />
+          </Link>
+        </div>
+      </aside>
     </div>
   );
 }
