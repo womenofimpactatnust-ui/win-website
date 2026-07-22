@@ -1,25 +1,29 @@
-import { Clock } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { PageHero } from "@/components/sections/page-hero";
-import { PodcastEpisodeList } from "@/components/sections/podcast-episode-list";
-import { PodcastRecentEpisode } from "@/components/sections/podcast-recent-episode";
-import { SOCH_KA_SAFAR_EPISODES } from "./episodes";
+import Link from "next/link";
 import Image from "next/image";
+import { Play } from "lucide-react";
+import { PageHero } from "@/components/sections/page-hero";
 
-const [RECENT_EPISODE, ...PREVIOUS_EPISODES] = SOCH_KA_SAFAR_EPISODES;
-
-const UPCOMING_EPISODES = [
+const SOCH_KA_SAFAR_EPISODES = [
   {
-    slug: "upcoming-episode-8",
-    title: "Soch ka Safar — Episode 8",
-    excerpt: "The next conversation in the series is being recorded — check back soon.",
-    thumbnail: "/media/events/womens-day/image-7.JPG",
+    slug: "soch-ka-safar-episode-1",
+    title: "Soch ka Safar — Episode 1",
+    description: "The first episode of WIN's podcast series — candid conversations from women of NUST.",
+    thumbnail: "/media/events/soch-ka-safar/Image-1.jpg",
+    duration: "— min",
   },
   {
-    slug: "upcoming-episode-9",
-    title: "Soch ka Safar — Episode 9",
-    excerpt: "A new voice from the WIN community joins for an upcoming episode.",
-    thumbnail: "/media/events/orientation/Image-4.JPG",
+    slug: "soch-ka-safar-episode-2",
+    title: "Soch ka Safar — Episode 2",
+    description: "Continuing the journey — more voices, more stories from the WIN community.",
+    thumbnail: "/media/events/soch-ka-safar/Image-2.jpg",
+    duration: "— min",
+  },
+  {
+    slug: "soch-ka-safar-episode-3",
+    title: "Soch ka Safar — Episode 3",
+    description: "Season highlights — reflections from the women who shaped this community.",
+    thumbnail: "/media/events/soch-ka-safar/image-5.jpg",
+    duration: "— min",
   },
 ] as const;
 
@@ -30,72 +34,34 @@ export default function PodcastsPage() {
         eyebrow="Podcasts"
         title="Conversations Worth Hearing"
         description="Episodes exploring the experiences shaping women's lives at NUST and beyond."
-        image="/media/events/behenchaara-circle/image-2.jpeg"
       />
 
-      <section className="pt-16">
-        <div className="px-6 md:px-10">
-          <p className="text-sm font-semibold uppercase tracking-wide text-middle-purple">
-            Recent
-          </p>
-          <h2 className="mt-2 font-heading text-2xl font-semibold text-jacarta sm:text-3xl">
-            Latest episode
-          </h2>
-        </div>
-
-        <PodcastRecentEpisode episode={RECENT_EPISODE} />
-      </section>
-
-      <section className="py-16">
-        <div className="px-6 md:px-10">
-          <p className="text-sm font-semibold uppercase tracking-wide text-old-lavender">
-            Previous
-          </p>
-          <h2 className="mt-2 font-heading text-2xl font-semibold text-jacarta sm:text-3xl">
-            Soch ka Safar
-          </h2>
-        </div>
-
-        <PodcastEpisodeList episodes={PREVIOUS_EPISODES} />
-      </section>
-
-      <section className="pb-20">
-        <div className="px-6 md:px-10">
-          <p className="text-sm font-semibold uppercase tracking-wide text-middle-purple">
-            Coming soon
-          </p>
-          <h2 className="mt-2 font-heading text-2xl font-semibold text-jacarta sm:text-3xl">
-            Upcoming episodes
-          </h2>
-        </div>
-
-        <div className="mt-8 grid gap-5 px-6 sm:grid-cols-2 md:px-10 lg:grid-cols-3">
-          {UPCOMING_EPISODES.map((episode) => (
-            <div
-              key={episode.slug}
-              className="group relative flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-jacarta/5"
+      <section className="mx-auto max-w-4xl px-6 py-16">
+        <div className="flex flex-col gap-4">
+          {SOCH_KA_SAFAR_EPISODES.map((ep) => (
+            <Link
+              key={ep.slug}
+              href={`/podcasts/${ep.slug}`}
+              className="group flex items-center gap-5 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-jacarta/5 transition-shadow hover:shadow-md"
             >
-              <div className="relative h-40 w-full overflow-hidden">
-                <Image
-                  src={episode.thumbnail}
-                  alt=""
-                  fill
-                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                  className="object-cover opacity-70 grayscale-[15%]"
-                />
-                <div className="absolute inset-0 bg-jacarta/30" aria-hidden />
+              <Image
+                src={ep.thumbnail}
+                alt={ep.title}
+                width={80}
+                height={80}
+                className="rounded-xl object-cover"
+              />
+              <div className="flex size-14 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-middle-purple to-old-lavender text-white">
+                <Play className="size-5 fill-current" />
               </div>
-              <div className="flex flex-col gap-3 p-5">
-                <Badge variant="outline" className="w-fit gap-1 border-old-lavender/40 text-old-lavender">
-                  <Clock className="size-3" />
-                  Upcoming
-                </Badge>
-                <h3 className="font-heading text-base font-semibold text-jacarta">
-                  {episode.title}
-                </h3>
-                <p className="text-sm text-jacarta/70">{episode.excerpt}</p>
+              <div className="flex-1">
+                <h2 className="font-heading text-lg font-semibold text-jacarta group-hover:text-middle-purple">
+                  {ep.title}
+                </h2>
+                <p className="mt-1 text-sm text-jacarta/70">{ep.description}</p>
               </div>
-            </div>
+              <span className="shrink-0 text-sm text-jacarta/50">{ep.duration}</span>
+            </Link>
           ))}
         </div>
       </section>

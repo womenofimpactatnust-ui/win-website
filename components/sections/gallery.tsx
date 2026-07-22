@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Reveal } from "@/components/ui/reveal";
 
 const GALLERY_ITEMS = [
   {
@@ -29,44 +28,36 @@ const GALLERY_ITEMS = [
 ] as const;
 
 export function Gallery() {
-  const track = [...GALLERY_ITEMS, ...GALLERY_ITEMS, ...GALLERY_ITEMS, ...GALLERY_ITEMS];
-
   return (
-    <section className="py-20">
-      <Reveal className="px-6 md:px-10">
+    <section className="mx-auto max-w-6xl px-6 py-20">
+      <div className="mx-auto max-w-2xl text-center">
         <p className="text-sm font-semibold uppercase tracking-wide text-old-lavender">
           Gallery
         </p>
         <h2 className="mt-2 font-heading text-3xl font-semibold text-jacarta sm:text-4xl">
           Moments from the WIN community
         </h2>
-      </Reveal>
+      </div>
 
-      <svg width="0" height="0" className="absolute" aria-hidden>
-        <defs>
-          <clipPath id="gallery-wave" clipPathUnits="objectBoundingBox">
-            <path d="M0,0 H1 V0.82 C0.85,0.98 0.65,0.98 0.5,0.88 C0.35,0.78 0.15,0.78 0,0.9 Z" />
-          </clipPath>
-        </defs>
-      </svg>
-
-      <div className="mt-10 overflow-hidden" style={{ clipPath: "url(#gallery-wave)" }}>
-        <div className="flex w-max animate-marquee-left">
-          {track.map((item, i) => (
-            <div
-              key={i}
-              className="relative aspect-square w-[46vw] shrink-0 overflow-hidden sm:w-[30vw] md:w-[18vw]"
-            >
-              <Image
-                src={item.src}
-                alt={item.label}
-                fill
-                sizes="(min-width: 768px) 18vw, (min-width: 640px) 30vw, 46vw"
-                className="w-full h-full object-cover"
-              />
+      <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-6">
+        {GALLERY_ITEMS.map((item) => (
+          <div
+            key={item.label}
+            className="relative aspect-square overflow-hidden rounded-2xl"
+          >
+            <Image
+              src={item.src}
+              alt={item.label}
+              fill
+              sizes="(min-width: 768px) 16vw, (min-width: 640px) 33vw, 50vw"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-x-0 bottom-0 bg-jacarta/70 px-3 py-2 text-white">
+              <p className="text-xs font-semibold leading-tight">{item.label}</p>
+              <p className="mt-0.5 text-[0.7rem] leading-tight text-white/80">25–26</p>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </section>
   );

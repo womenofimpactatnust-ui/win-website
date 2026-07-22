@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Mic, Newspaper } from "lucide-react";
+import { BookHeart, Mic, Newspaper } from "lucide-react";
 import {
   Card,
   CardHeader,
@@ -9,6 +9,12 @@ import {
 } from "@/components/ui/card";
 
 const SECTIONS = [
+  {
+    href: "/admin/stories",
+    icon: BookHeart,
+    title: "Story Moderation",
+    description: "Review and approve pending story submissions.",
+  },
   {
     href: "/admin/podcasts",
     icon: Mic,
@@ -33,7 +39,7 @@ export default function AdminDashboardPage() {
         Content management for WIN. Authentication is not yet wired up.
       </p>
 
-      <div className="mt-10 grid gap-6 md:grid-cols-2">
+      <div className="mt-10 grid gap-6 md:grid-cols-3">
         {SECTIONS.map(({ href, icon: Icon, title, description }) => (
           <Link key={href} href={href}>
             <Card className="border-none bg-white p-2 shadow-sm ring-0 transition-shadow hover:shadow-md">
